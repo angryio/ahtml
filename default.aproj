@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="gb2312"?>
+<project ver="0.60" name="AAutoFastCGI" libEmbed="true" icon="..." CompanyName="AAutoFastCGI" FileDescription="AAutoFastCGI" LegalCopyright="Copyright (C) lujjjh 2012" ProductName="AAutoFastCGI" InternalName="AAutoFastCGI" FileVersion="0.0.1.001" ProductVersion="0.0.1.001" publishDir="/Publish/">
+	<file name="main.aau" path="main.aau"/>
+	<folder name="资源文件" path="res" embed="true"/>
+</project>
