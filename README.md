@@ -1,7 +1,7 @@
 ## 介绍
 ahtml 是一个服务端脚本语言。ahtml 以 AAuto 作为母语言，即可以实现在 html 中嵌入 AAuto 代码，嵌入规则很简单，与 php 类似：
 
-```
+```html
 <?
 var tab = { "Hello"; "world" };
 ?>
@@ -18,7 +18,7 @@ for (i, v in tab) {
 
 如果你希望代码读起来更加优美，也可以这样写：
 
-```
+```html
 ...
 <body>
 <? for i, v in tab begin ?>
@@ -53,7 +53,7 @@ IIS6 默认不支持 FastCGI，需要下载扩展。
 ``cscript fcgiconfig.js -add -section:"ahtml" -extension:ahtml -path:"{所在文件夹}/ahtmlcgi.exe"``
 
 如果服务器不支持或禁用了 ``cscript``，请用记事本程序打开并编辑 ``%WINDIR%\system32\inetsrv\fcigext.ini``，在其末尾添加：
-```
+```ini
 [Types]
 ahtml=ahtml
 [ahtml]
