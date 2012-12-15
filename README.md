@@ -23,7 +23,7 @@ for (index, content in tab) {
 <body>
 <? for index, content in tab begin ?>
 	<p>第<?=index?>条: <?=content?></p>
-<? end//for; ?>
+<? end ?>
 </body>
 ...
 ```
@@ -211,7 +211,7 @@ ahtml 作为服务端语言，同时作为 FastCGI 应用，需要处理来自 W
 		<td><?=key?></td>
 		<td><?=value?></td>
 	</tr>
-	<? end//for; ?>
+	<? end ?>
 </table>
 </body>
 </html>
