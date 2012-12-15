@@ -1,15 +1,15 @@
 ## 介绍
 ahtml 是一个服务端脚本语言。ahtml 以 AAuto 作为母语言，即可以实现在 html 中嵌入 AAuto 代码，嵌入规则很简单，与 php 类似：
 
-```html
+```html+php
 <?
 var tab = { "Hello"; "world" };
 ?>
 ...
 <body>
 <?
-for (i, v in tab) {
-  response.write("<p>第", i, "条: ", v, "</p>", '\r\n');
+for (index, content in tab) {
+  response.write("<p>第", index, "条: ", content, "</p>", '\r\n');
 }
 ?>
 </body>
@@ -18,11 +18,11 @@ for (i, v in tab) {
 
 如果你希望代码读起来更加优美，也可以这样写：
 
-```html
+```html+php
 ...
 <body>
-<? for i, v in tab begin ?>
-	<p>第<?=i?>条: <?=v?></p>
+<? for index, content in tab begin ?>
+	<p>第<?=index?>条: <?=content?></p>
 <? end//for; ?>
 </body>
 ...
