@@ -109,3 +109,112 @@ ExePath={所在文件夹}/ahtmlcgi.exe
 
 #### 重启 IIS
 使用管理员权限运行命令提示符，在命令提示符中输入并运行：``iisreset``。
+
+## 语法
+### 基本语法
+ahtml 的语法源于 AAuto，因此 ahtml 支持 AAuto 所有的语法特性（包括基本流程语句、库引用机制等）。
+
+### 标准库
+除 AAuto 内核库之外，ahtml 会自动引入一些标准库。另外，并不是所有的 AAuto 标准库都可以在 ahtml 中被引入。下面的表格展示了自动引入的标准库以及可引入的标准库。
+
+<table>
+	<tr>
+		<th>库名称</th>
+		<th>是否自动引入</th>
+	</tr>
+	<tr>
+		<td>console</td>
+		<td>是</td>
+	</tr>
+	<tr>
+		<td>com</td>
+		<td>是</td>
+	</tr>
+	<tr>
+		<td>util</td>
+		<td>是</td>
+	</tr>
+	<tr>
+		<td>fsys</td>
+		<td>否</td>
+	</tr>
+</table>
+
+### 用户库
+除标准库之外，用户可自定义用户库。ahtml 文件同目录下可以新建一个名为 ``lib`` 的文件夹，其中的库文件即为“用户库”，可在 ahtml 文件中被引入（用法同 AAuto 的用户库相同）。
+
+### 扩展对象
+ahtml 作为服务端语言，同时作为 FastCGI 应用，需要处理来自 Web 服务器的客户端请求并作出响应。
+
+简单地说，ahtml 的扩展对象有两个：
+
+<table>
+	<tr>
+		<td>类型</td>
+		<td>对象名</td>
+	</tr>
+	<tr>
+		<td>请求对象</td>
+		<td>request</td>
+	</tr>
+	<tr>
+		<td>响应对象</td>
+		<td>response</td>
+	</tr>
+</table>
+
+#### 请求 (request) 对象
+请求对象是用来获取来自 Web 服务器的客户端请求信息的（如 Web 服务端、站点信息，Query String、POST Data、附加协议头等）。
+
+就目前而言，request 对象有四个键值对成员：
+<table>
+	<tr>
+		<td>成员名</td>
+		<td>用途</td>
+	</tr>
+	<tr>
+		<td>server</td>
+		<td>来源于服务器的信息，相当于 PHP 中的 ``$_SERVER`` 数组</td>
+	</tr>
+	<tr>
+		<td>post</td>
+		<td>客户端的 POST Data，相当于 PHP 中的 ``$_POST`` 数组</td>
+	</tr>
+	<tr>
+		<td>get</td>
+		<td>客户端的 Query String，相当于 PHP 中的 ``$_GET`` 数组</td>
+	</tr>
+	<tr>
+		<td>cookie</td>
+		<td>客户端的 COOKIE，相当于 PHP 中的 ``$_COOKIE`` 数组</td>
+	</tr>
+</table>
+
+其操作方法如同 AAuto 中的普通键值对一样（需要注意的是，``request.cookie`` 比较特殊，不支持直接遍历。
+
+范例：
+```php+html
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>request.server 测试</title>
+</head>
+<body>
+<table>
+	<tr>
+		<th>键名</th>
+		<th>值</th>
+	</tr>
+	<? for key, value in request.server begin ?>
+	<tr>
+		<td><?=key?></td>
+		<td><?=value?></td>
+	</tr>
+	<? end//for; ?>
+</table>
+</body>
+</html>
+```
+
+需要注意的是，实际应用时应在输出前转义 html 字符，避免 XSS 攻击。
