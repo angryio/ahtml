@@ -150,8 +150,8 @@ ahtml 作为服务端语言，同时作为 FastCGI 应用，需要处理来自 W
 
 <table>
 	<tr>
-		<td>类型</td>
-		<td>对象名</td>
+		<th>类型</th>
+		<th>对象名</th>
 	</tr>
 	<tr>
 		<td>请求对象</td>
@@ -169,8 +169,8 @@ ahtml 作为服务端语言，同时作为 FastCGI 应用，需要处理来自 W
 就目前而言，request 对象有四个键值对成员：
 <table>
 	<tr>
-		<td>成员名</td>
-		<td>用途</td>
+		<th>成员名</th>
+		<th>用途</th>
 	</tr>
 	<tr>
 		<td>server</td>
@@ -217,4 +217,4 @@ ahtml 作为服务端语言，同时作为 FastCGI 应用，需要处理来自 W
 </html>
 ```
 
-需要注意的是，实际应用时应在输出前转义 html 字符，避免 XSS 攻击。
+需要注意的是，实际应用时应在输出前转义 html 字符，以避免 XSS 攻击。
