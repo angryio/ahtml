@@ -112,7 +112,7 @@ ExePath={所在文件夹}/ahtmlcgi.exe
 
 ## 语法
 ### 基本语法
-ahtml 的语法源于 AAuto，因此 ahtml 支持 AAuto 所有的语法特性（包括基本流程语句、库引用机制等）。
+ahtml 以 AAuto 作为母语言，因此 ahtml 支持 AAuto 所有的语法特性（包括基本流程语句、库引用机制等）。
 
 ### 标准库
 除 AAuto 内核库之外，ahtml 会自动引入一些标准库。另外，并不是所有的 AAuto 标准库都可以在 ahtml 中被引入。下面的表格展示了自动引入的标准库以及可引入的标准库。
@@ -193,7 +193,7 @@ ahtml 作为服务端语言，同时作为 FastCGI 应用，需要处理来自 W
 其操作方法如同 AAuto 中的普通键值对一样（需要注意的是，``request.cookie`` 比较特殊，不支持直接遍历。
 
 范例：
-```php+html
+```html+php
 <!doctype html>
 <html>
 <head>
