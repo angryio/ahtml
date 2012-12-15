@@ -37,6 +37,9 @@ run = function (ns, filename = "", code) {
 	code = 'namespace ' + ns + ';
 		import io; import console; import string;
 		import table; import math; import time;
+		import com; import util;
+		var request = ..request;
+		var response = ..response;
 		require = function (filename, code) {
 			if (code === null)
 				filename = ..io.fullpath(filename);

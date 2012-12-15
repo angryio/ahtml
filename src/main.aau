@@ -4,10 +4,23 @@ import util.buffer;
 import script.aau;
 import script.ahtml;
 
+import com;
+import util;
+
+import request;
+import response;
+
+global.onError= function( e ){ 
+	import debug.log;
+	debug.log.write(e);
+	debug.log.flush();
+	return true; 
+}
+
 while (fcgi.accept()) {
 	util.buffer.beginBuffer();
 	try {
-		var filename = io.SERVER["SCRIPT_FILENAME"];
+		var filename = request.server["SCRIPT_FILENAME"];
 		var file = fsys.file(filename, 'r');
 		if (!file) {
 			error("No input file specified. ", -1);

@@ -65,14 +65,14 @@ var _accept = function () {
 			..io.stdout.write(...);
 			..io.stdout.write('\r\n');
 		}
-		..io.SERVER = ..table.mixin({}, currentRequest.paramsData);
-		..io.POST = {};
+		..request.server = ..table.mixin({}, currentRequest.paramsData);
+		..request.post = {};
 		if (currentRequest.paramsData["REQUEST_METHOD"] === "POST") {
 			if (currentRequest.paramsData["HTTP_CONTENT_TYPE"] === "application/x-www-form-urlencoded") {
-				..io.POST = app.posts(currentRequest.stdinData);
+				..request.post = app.posts(currentRequest.stdinData);
 			}
 		}
-		..io.GET = app.gets(currentRequest.paramsData[["QUERY_STRING"]]);
+		..request.get = app.gets(currentRequest.paramsData[["QUERY_STRING"]]);
 	} while (0);
 }
 

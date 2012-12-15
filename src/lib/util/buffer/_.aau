@@ -10,8 +10,9 @@ beginBuffer = function () {
 	oldStdErrWrite = ..io.stderr.write;
 	stdOutBuf = {}; stdErrBuf = {};
 	..io.status = null;
-	..io.headers = headers();
-	..io.COOKIE = cookies(..io.SERVER["HTTP_COOKIE"]);
+	..response.header = headers();
+	..request.cookie = cookies( ..request.server["HTTP_COOKIE"] )["_requestCookies"];
+	..response.cookie = cookies();
 	..io.stdout.write = function (...) {
 		if (#{...})
 			..table.push(stdOutBuf, ...);
@@ -23,13 +24,13 @@ beginBuffer = function () {
 }
 
 endBuffer = function () {
-	if (..io.status !== null) {
-		oldStdoutWrite("Status: ", ..io.status, '\r\n');
+	if (..response.status !== null) {
+		oldStdoutWrite("Status: ", ..response.status, '\r\n');
 	}
-	for (k, v in ..io.headers) {
+	for (k, v in ..response.header) {
 		oldStdoutWrite(k, ": ", v, '\r\n');
 	}
-	oldStdoutWrite(..io.COOKIE.genHeaders());
+	oldStdoutWrite(..response.cookie.genHeaders());
 	oldStdoutWrite('\r\n');
 	oldStdoutWrite( ..table.unpack(stdOutBuf) );
 	oldStdErrWrite( ..table.unpack(stdErrBuf) );
