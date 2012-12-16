@@ -9,7 +9,7 @@ beginBuffer = function () {
 	oldStdoutWrite = ..io.stdout.write;
 	oldStdErrWrite = ..io.stderr.write;
 	stdOutBuf = {}; stdErrBuf = {};
-	..io.status = null;
+	..response.status = null;
 	..response.header = headers();
 	..request.cookie = cookies( ..request.server["HTTP_COOKIE"] )["_requestCookies"];
 	..response.cookie = cookies();
