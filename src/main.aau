@@ -26,8 +26,8 @@ while (fcgi.accept()) {
 			error("No input file specified. ", -1);
 		}
 		file.close();
-		script.ahtml.run("webpage", filename);
-		webpage = null;
+		script.ahtml.run("ns", filename);
+		ns = null;
 	}
 	catch (e) {
 		io.stderr.write(e);
