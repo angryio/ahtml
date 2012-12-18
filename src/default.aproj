@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="gb2312"?>
+<project ver="0.60" name="ahtmlCompiler" libEmbed="true" icon="..." CompanyName="快手饭" FileDescription="ahtml 编译工具" LegalCopyright="Copyright (C) lujjjh 2012" ProductName="ahtmlCompiler" InternalName="ahtmlCompiler" FileVersion="0.0.1.001" ProductVersion="0.0.1.001" publishDir="\release">
+	<file name="main.aau" path="main.aau"/>
+</project>

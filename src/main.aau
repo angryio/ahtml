@@ -1,0 +1,65 @@
+import win.ui;
+/*DSG{{*/
+var winform = ..win.form( parent=...;bottom=51;max=false;text="ahtml 编译工具";right=123;min=false;acceptfiles=1 )
+winform.add( 
+compileButton={ bottom=40;text="编译";left=16;top=12;z=1;right=104;cls="button" }
+)
+/*}}*/
+
+import fsys;
+import fsys.dlg;
+
+var rep = string.replace;
+
+var preCompile = function (ns, code) {
+	if ( ! ..string.find(code, "<\<\?>|<\?\>>") ) {
+		return '..io.stdout.write("' + rep(code, '"', '""') + '");';
+	}
+	var replacer = function (r, s) {
+		if (#s) {
+			return r + '..io.stdout.write("' + rep(s, '"', '""') + '");';
+		}
+		else {
+			return r;
+		}
+	}
+	code = rep(code, "\<\?<\s*>=([\s\S]*?)<;*>\?\>", "<?..io.stdout.write(\1);?>");
+	code = rep(code, "^(<\r\n>?)([\s\S]*?)\<\?", replacer);
+	code = rep(code, "\?\>(<\r\n>?)([\s\S]*?)\<\?", replacer);
+	code = rep(code, "\?\>(<\r\n>?)([\s\S]*?)$", replacer);
+	code = 'namespace ' + ns + ';
+		import io; import console; import string;
+		import table; import math; import time;
+		import com; import util;
+		var request = ..request;
+		var response = ..response;
+		require = function (filename, code) {
+			if (code === null)
+				filename = ..io.fullpath(filename);
+			..script.ahtml.run("' + ns + '", filename, code);
+		}
+		' + code;
+	return code;
+}
+
+var compileAHTML = function (filename) {
+	var fif = io.splitpath(filename);
+	if (fif.ext === ".ahtml") {
+		var code = preCompile( "ns", string.load(filename) );
+		var newPath = fsys.joinpath(fif.dir, fif.name + ".bin");
+		string.save(newPath + ".aau", code);
+		code = dumpcode( assert(loadcode(newPath + ".aau")) );
+		string.save(newPath + ".ahtml", "<?" + code);
+	}
+}
+
+winform.compileButton.oncommand = function(id,event){
+	var filename = fsys.dlg.open("*.ahtml|*.ahtml||");
+	if (filename) {
+		compileAHTML(filename);
+		winform.msgbox("编译成功！");
+	}
+}
+
+winform.show();
+win.loopMessage();
