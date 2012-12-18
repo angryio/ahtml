@@ -34,18 +34,6 @@ run = function (ns, filename = "", code) {
 		code = file.read(-1);	
 		file.close();
 	}
-	code = 'namespace ' + ns + ';
-		import io; import console; import string;
-		import table; import math; import time;
-		import com; import util;
-		var request = ..request;
-		var response = ..response;
-		require = function (filename, code) {
-			if (code === null)
-				filename = ..io.fullpath(filename);
-			..script.ahtml.run("' + ns + '", filename, code);
-		}
-		' + code;
 	var f, err = loadcode(code);
 	if (!f) throw(filename, err);
 	var parentDir = ..fsys.getParentDir(filename);

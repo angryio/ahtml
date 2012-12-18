@@ -3,7 +3,7 @@ namespace script.ahtml;
 
 var rep = ..string.replace;
 
-var compile = function (code) {
+var preCompile = function (ns, code) {
 	if ( ! ..string.find(code, "<\<\?>|<\?\>>") ) {
 		return '..io.stdout.write("' + rep(code, '"', '""') + '");';
 	}
@@ -19,6 +19,18 @@ var compile = function (code) {
 	code = rep(code, "^(<\r\n>?)([\s\S]*?)\<\?", replacer);
 	code = rep(code, "\?\>(<\r\n>?)([\s\S]*?)\<\?", replacer);
 	code = rep(code, "\?\>(<\r\n>?)([\s\S]*?)$", replacer);
+	code = 'namespace ' + ns + ';
+		import io; import console; import string;
+		import table; import math; import time;
+		import com; import util;
+		var request = ..request;
+		var response = ..response;
+		require = function (filename, code) {
+			if (code === null)
+				filename = ..io.fullpath(filename);
+			..script.ahtml.run("' + ns + '", filename, code);
+		}
+		' + code;
 	return code;
 }
 
@@ -31,6 +43,12 @@ run = function (ns, filename = "", code) {
 		code = file.read(-1);	
 		file.close();
 	}
-	code = compile(code);
+	if ( ..string.startWith(code, "<?=AAuto") ) {
+		// ahtml ÒÑ±àÒë
+		code = ..string.right(code, -3);
+	}
+	else {
+		code = preCompile(ns, code);
+	}
 	..script.aau.run(ns, filename, code);
 }
