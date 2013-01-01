@@ -19,7 +19,6 @@ global.onError= function( e ){
 }
 
 while (fcgi.accept()) {
-	collectgarbage("collect");
 	util.buffer.beginBuffer();
 	try {
 		var filename = request.server["SCRIPT_FILENAME"];
@@ -35,4 +34,5 @@ while (fcgi.accept()) {
 		io.stderr.write(e);
 	}
 	util.buffer.endBuffer();
+	collectgarbage("collect");
 }

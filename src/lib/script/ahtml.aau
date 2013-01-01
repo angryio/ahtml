@@ -19,22 +19,23 @@ var preCompile = function (ns, code) {
 	code = rep(code, "^(<\r\n>?)([\s\S]*?)\<\?", replacer);
 	code = rep(code, "\?\>(<\r\n>?)([\s\S]*?)\<\?", replacer);
 	code = rep(code, "\?\>(<\r\n>?)([\s\S]*?)$", replacer);
-	code = 'namespace ' + ns + ';
+	code = '
+		namespace ' + ns + ';
 		import io; import console; import string;
 		import table; import math; import time;
 		import com; import util;
 		var request = ..request;
 		var response = ..response;
-		require = function (filename, code) {
+		require = function (filename, args, code) {
 			if (code === null)
 				filename = ..io.fullpath(filename);
-			..script.ahtml.run("' + ns + '", filename, code);
+			..script.ahtml.run("' + ns + '", filename, code, args);
 		}
 		' + code;
 	return code;
 }
 
-run = function (ns, filename = "", code) {
+run = function (ns, filename = "", code, args) {
 	if (code === null) {
 		var file = ..fsys.file(filename, "r");
 		if ( ! file) {
@@ -50,5 +51,5 @@ run = function (ns, filename = "", code) {
 	else {
 		code = preCompile(ns, code);
 	}
-	..script.aau.run(ns, filename, code);
+	..script.aau.run(ns, filename, code, args);
 }

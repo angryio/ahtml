@@ -25,7 +25,7 @@ var throw = function (filename, e) {
 	error("", -1);
 }
 
-run = function (ns, filename = "", code) {
+run = function (ns, filename = "", code, args) {
 	if (code === null) {
 		var file = ..fsys.file(filename, "r");
 		if ( ! file) {
@@ -39,7 +39,7 @@ run = function (ns, filename = "", code) {
 	var parentDir = ..fsys.getParentDir(filename);
 	var preCurDir = ..fsys.getCurDir();
 	..fsys.setCurDir(parentDir);
-	var re, err = ..fiber.resume( ..fiber.create(f, parentDir) );
+	var re, err = ..fiber.resume( ..fiber.create(f, parentDir), args );
 	..fsys.setCurDir(preCurDir);
 	if (!re && err !== "") throw(filename, err);
 }
