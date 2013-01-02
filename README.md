@@ -123,25 +123,43 @@ ahtml 以 AAuto 作为母语言，因此 ahtml 支持 AAuto 所有的语法特�
 		<th>是否自动引入</th>
 	</tr>
 	<tr>
-		<td>console</td>
-		<td>是</td>
-	</tr>
-	<tr>
 		<td>com</td>
 		<td>是</td>
 	</tr>
 	<tr>
-		<td>util</td>
+		<td>console</td>
 		<td>是</td>
 	</tr>
 	<tr>
 		<td>fsys</td>
 		<td>否</td>
 	</tr>
+	<tr>
+		<td>util</td>
+		<td>是</td>
+	</tr>
+</table>
+
+### 扩展库
+ahtml 也会引入 AAuto 中的一些扩展库。
+
+<table>
+	<tr>
+		<th>库名称</th>
+		<th>是否自动引入</th>
+	</tr>
+	<tr>
+		<td>mysql</td>
+		<td>是</td>
+	</tr>
+	<tr>
+		<td>preg</td>
+		<td>否</td>
+	</tr>
 </table>
 
 ### 用户库
-除标准库之外，用户可自定义用户库。ahtml 文件同目录下可以新建一个名为 ``lib`` 的文件夹，其中的库文件即为“用户库”，可在 ahtml 文件中被引入（用法同 AAuto 的用户库相同）。
+除标准库、扩展库之外，用户可自定义用户库。ahtml 文件同目录下可以新建一个名为 ``lib`` 的文件夹，其中的库文件即为“用户库”，可在 ahtml 文件中被引入（用法同 AAuto 的用户库相同）。
 
 ### 扩展对象
 ahtml 作为服务端语言，同时作为 FastCGI 应用，需要处理来自 Web 服务器的客户端请求并作出响应。
