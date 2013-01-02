@@ -26,7 +26,7 @@ var preCompile = function (ns, code) {
 		import com; import util;
 		var request = ..request;
 		var response = ..response;
-		require = function (filename, args, code) {
+		var require = function (filename, args, code) {
 			if (code === null)
 				filename = ..io.fullpath(filename);
 			..script.ahtml.run("' + ns + '", filename, code, args);

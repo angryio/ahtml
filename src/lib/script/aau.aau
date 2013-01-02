@@ -39,7 +39,7 @@ run = function (ns, filename = "", code, args) {
 	var parentDir = ..fsys.getParentDir(filename);
 	var preCurDir = ..fsys.getCurDir();
 	..fsys.setCurDir(parentDir);
-	var re, err = ..fiber.resume( ..fiber.create(f, parentDir), args );
+	var re, err = ..fiber.resume( ..fiber.create(f, ..request.server["DOCUMENT_ROOT"]), args );
 	..fsys.setCurDir(preCurDir);
 	if (!re && err !== "") throw(filename, err);
 }
